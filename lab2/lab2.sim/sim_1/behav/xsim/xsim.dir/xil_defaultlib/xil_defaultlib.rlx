@@ -1,0 +1,9 @@
+0.6
+2018.2
+Oct  1 2018
+20:13:33
+C:/Users/Nathan Chen/Desktop/cs152b/cs152b/lab2/lab2.sim/sim_1/behav/xsim/glbl.v,1529022455,verilog,,,,glbl,,,,,,,,
+C:/Users/Nathan Chen/Downloads/UART.v,1777345245,verilog,,C:/Users/Nathan Chen/Downloads/rx.v,,UART;clk_divider,,,,,,,,
+C:/Users/Nathan Chen/Downloads/rx.v,1777344338,verilog,,C:/Users/Nathan Chen/Downloads/tx.v,,rx,,,,,,,,
+C:/Users/Nathan Chen/Downloads/tb_uart.v,1777339167,verilog,,,,tb_uart,,,,,,,,
+C:/Users/Nathan Chen/Downloads/tx.v,1777344847,verilog,,C:/Users/Nathan Chen/Downloads/tb_uart.v,,tx,,,,,,,,

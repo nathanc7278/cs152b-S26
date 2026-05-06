@@ -1,0 +1,13 @@
+
+*** Running vivado
+    with args -log part1_hello_world_dlmb_v10_0.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source part1_hello_world_dlmb_v10_0.tcl
+
+
+****** Vivado v2018.2.2 (64-bit)
+  **** SW Build 2348494 on Mon Oct  1 18:25:44 MDT 2018
+  **** IP Build 2318053 on Mon Oct  1 21:44:26 MDT 2018
+    ** Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+
+source part1_hello_world_dlmb_v10_0.tcl -notrace
+INFO: [IP_Flow 19-4838] Using cached IP synthesis design for IP part1_hello_world_dlmb_v10_0, cache-ID = 9a886986e0d76954.
+INFO: [Common 17-206] Exiting Vivado at Mon May  4 11:01:50 2026...

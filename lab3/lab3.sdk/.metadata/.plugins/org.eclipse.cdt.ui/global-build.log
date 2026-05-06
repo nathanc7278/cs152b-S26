@@ -1,0 +1,220 @@
+11:27:16 **** Build of project lab3_bsp ****
+make -k all 
+"Running Make include in microblaze_0/libsrc/bram_v4_2/src"
+make -C microblaze_0/libsrc/bram_v4_2/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v10.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Running Make include in microblaze_0/libsrc/cpu_v2_7/src"
+make -C microblaze_0/libsrc/cpu_v2_7/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v10.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Running Make include in microblaze_0/libsrc/gpio_v4_3/src"
+make -C microblaze_0/libsrc/gpio_v4_3/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v10.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Running Make include in microblaze_0/libsrc/standalone_v6_7/src"
+make -C microblaze_0/libsrc/standalone_v6_7/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v10.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Running Make include in microblaze_0/libsrc/uartlite_v3_2/src"
+make -C microblaze_0/libsrc/uartlite_v3_2/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v10.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Running Make libs in microblaze_0/libsrc/bram_v4_2/src"
+make -C microblaze_0/libsrc/bram_v4_2/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v10.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Compiling bram"
+mb-ar: creating ../../../lib/libxil.a
+"Running Make libs in microblaze_0/libsrc/cpu_v2_7/src"
+make -C microblaze_0/libsrc/cpu_v2_7/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v10.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Compiling cpu"
+"Running Make libs in microblaze_0/libsrc/gpio_v4_3/src"
+make -C microblaze_0/libsrc/gpio_v4_3/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v10.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Compiling gpio"
+"Running Make libs in microblaze_0/libsrc/standalone_v6_7/src"
+make -C microblaze_0/libsrc/standalone_v6_7/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v10.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Compiling standalone";
+microblaze_sleep.c:74:9: note: #pragma message: For the sleep routines, assembly instructions are used
+ #pragma message ("For the sleep routines, assembly instructions are used")
+         ^~~~~~~
+"Running Make libs in microblaze_0/libsrc/uartlite_v3_2/src"
+make -C microblaze_0/libsrc/uartlite_v3_2/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v10.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Compiling uartlite"
+'Finished building libraries'
+
+**** Build of configuration Debug for project lab3 ****
+
+Nothing to build for project lab3
+11:27:49 **** Auto Build of configuration Debug for project lab3 ****
+make all 
+'Building file: ../src/main.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -I../../lab3_bsp/microblaze_0/include -mlittle-endian -mcpu=v10.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+'Finished building: ../src/main.c'
+' '
+'Building target: lab3.elf'
+'Invoking: MicroBlaze gcc linker'
+mb-gcc -Wl,-T -Wl,../src/lscript.ld -L../../lab3_bsp/microblaze_0/lib -mlittle-endian -mcpu=v10.0 -mxl-soft-mul -Wl,--no-relax -Wl,--gc-sections -o "lab3.elf"  ./src/main.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+c:/xilinx/sdk/2018.2/gnu/microblaze/nt/bin/../lib/gcc/microblaze-xilinx-elf/7.2.0/../../../../microblaze-xilinx-elf/lib/le/crtinit.o: In function `_crtinit':
+(.text+0x78): undefined reference to `main'
+collect2.exe: error: ld returned 1 exit status
+make: *** [lab3.elf] Error 1
+11:31:01 **** Auto Build of configuration Debug for project lab3 ****
+make all 
+'Building file: ../src/main.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -I../../lab3_bsp/microblaze_0/include -mlittle-endian -mcpu=v10.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+'Finished building: ../src/main.c'
+' '
+'Building target: lab3.elf'
+'Invoking: MicroBlaze gcc linker'
+mb-gcc -Wl,-T -Wl,../src/lscript.ld -L../../lab3_bsp/microblaze_0/lib -mlittle-endian -mcpu=v10.0 -mxl-soft-mul -Wl,--no-relax -Wl,--gc-sections -o "lab3.elf"  ./src/main.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: lab3.elf'
+' '
+'Invoking: MicroBlaze Print Size'
+mb-size lab3.elf  |tee "lab3.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+   6676	    292	   3120	  10088	   2768	lab3.elf
+'Finished building: lab3.elf.size'
+' '
+11:33:34 **** Incremental Build of configuration Debug for project lab3 ****
+make all 
+make: Nothing to be done for `all'.
+11:33:35 **** Auto Build of configuration Debug for project lab3 ****
+make all 
+make: Nothing to be done for `all'.
+11:39:02 **** Auto Build of configuration Debug for project lab3 ****
+make all 
+'Building file: ../src/main.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -I../../lab3_bsp/microblaze_0/include -mlittle-endian -mcpu=v10.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c: In function 'main':
+../src/main.c:45:1: warning: implicit declaration of function 'scanf' [-Wimplicit-function-declaration]
+ scanf("%d", &a);
+ ^~~~~
+../src/main.c:45:1: warning: incompatible implicit declaration of built-in function 'scanf'
+../src/main.c:45:1: note: include '<stdio.h>' or provide a declaration of 'scanf'
+../src/main.c:45:14: error: 'a' undeclared (first use in this function)
+ scanf("%d", &a);
+              ^
+../src/main.c:45:14: note: each undeclared identifier is reported only once for each function it appears in
+../src/main.c:46:1: warning: implicit declaration of function 'getchar'; did you mean 'memchr'? [-Wimplicit-function-declaration]
+ getchar();
+ ^~~~~~~
+ memchr
+make: *** [src/main.o] Error 1
+11:39:15 **** Auto Build of configuration Debug for project lab3 ****
+make all 
+'Building file: ../src/main.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -I../../lab3_bsp/microblaze_0/include -mlittle-endian -mcpu=v10.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c: In function 'main':
+../src/main.c:45:2: warning: implicit declaration of function 'scanf' [-Wimplicit-function-declaration]
+  scanf("%d", &a);
+  ^~~~~
+../src/main.c:45:2: warning: incompatible implicit declaration of built-in function 'scanf'
+../src/main.c:45:2: note: include '<stdio.h>' or provide a declaration of 'scanf'
+../src/main.c:45:15: error: 'a' undeclared (first use in this function)
+  scanf("%d", &a);
+               ^
+../src/main.c:45:15: note: each undeclared identifier is reported only once for each function it appears in
+../src/main.c:46:2: warning: implicit declaration of function 'getchar'; did you mean 'memchr'? [-Wimplicit-function-declaration]
+  getchar();
+  ^~~~~~~
+  memchr
+make: *** [src/main.o] Error 1
+11:39:24 **** Incremental Build of configuration Debug for project lab3 ****
+make all 
+'Building file: ../src/main.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -I../../lab3_bsp/microblaze_0/include -mlittle-endian -mcpu=v10.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c: In function 'main':
+../src/main.c:45:2: warning: implicit declaration of function 'scanf' [-Wimplicit-function-declaration]
+  scanf("%d", &a);
+  ^~~~~
+../src/main.c:45:2: warning: incompatible implicit declaration of built-in function 'scanf'
+../src/main.c:45:2: note: include '<stdio.h>' or provide a declaration of 'scanf'
+../src/main.c:45:15: error: 'a' undeclared (first use in this function)
+  scanf("%d", &a);
+               ^
+../src/main.c:45:15: note: each undeclared identifier is reported only once for each function it appears in
+../src/main.c:46:2: warning: implicit declaration of function 'getchar'; did you mean 'memchr'? [-Wimplicit-function-declaration]
+  getchar();
+  ^~~~~~~
+  memchr
+make: *** [src/main.o] Error 1
+11:41:53 **** Auto Build of configuration Debug for project lab3 ****
+make all 
+'Building file: ../src/main.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -I../../lab3_bsp/microblaze_0/include -mlittle-endian -mcpu=v10.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c: In function 'main':
+../src/main.c:46:2: warning: implicit declaration of function 'scanf' [-Wimplicit-function-declaration]
+  scanf("%d", &a);
+  ^~~~~
+../src/main.c:46:2: warning: incompatible implicit declaration of built-in function 'scanf'
+../src/main.c:46:2: note: include '<stdio.h>' or provide a declaration of 'scanf'
+../src/main.c:47:2: warning: implicit declaration of function 'getchar'; did you mean 'memchr'? [-Wimplicit-function-declaration]
+  getchar();
+  ^~~~~~~
+  memchr
+'Finished building: ../src/main.c'
+' '
+'Building target: lab3.elf'
+'Invoking: MicroBlaze gcc linker'
+mb-gcc -Wl,-T -Wl,../src/lscript.ld -L../../lab3_bsp/microblaze_0/lib -mlittle-endian -mcpu=v10.0 -mxl-soft-mul -Wl,--no-relax -Wl,--gc-sections -o "lab3.elf"  ./src/main.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+c:/xilinx/sdk/2018.2/gnu/microblaze/nt/bin/../lib/gcc/microblaze-xilinx-elf/7.2.0/../../../../microblaze-xilinx-elf/bin/ld.exe: lab3.elf section `.text' will not fit in region `microblaze_0_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_0_local_memory_dlmb_bram_if_cntlr_Mem'
+c:/xilinx/sdk/2018.2/gnu/microblaze/nt/bin/../lib/gcc/microblaze-xilinx-elf/7.2.0/../../../../microblaze-xilinx-elf/bin/ld.exe: region `microblaze_0_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_0_local_memory_dlmb_bram_if_cntlr_Mem' overflowed by 96008 bytes
+collect2.exe: error: ld returned 1 exit status
+make: *** [lab3.elf] Error 1
+11:42:08 **** Auto Build of configuration Debug for project lab3 ****
+make all 
+'Building file: ../src/main.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -I../../lab3_bsp/microblaze_0/include -mlittle-endian -mcpu=v10.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+'Finished building: ../src/main.c'
+' '
+'Building target: lab3.elf'
+'Invoking: MicroBlaze gcc linker'
+mb-gcc -Wl,-T -Wl,../src/lscript.ld -L../../lab3_bsp/microblaze_0/lib -mlittle-endian -mcpu=v10.0 -mxl-soft-mul -Wl,--no-relax -Wl,--gc-sections -o "lab3.elf"  ./src/main.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: lab3.elf'
+' '
+'Invoking: MicroBlaze Print Size'
+mb-size lab3.elf  |tee "lab3.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+   5416	    272	   3104	   8792	   2258	lab3.elf
+'Finished building: lab3.elf.size'
+' '
+11:42:12 **** Incremental Build of configuration Debug for project lab3 ****
+make all 
+make: Nothing to be done for `all'.
+11:42:29 **** Incremental Build of configuration Debug for project lab3 ****
+make all 
+make: Nothing to be done for `all'.
+11:47:16 **** Auto Build of configuration Debug for project lab3 ****
+make all 
+'Building file: ../src/main.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -I../../lab3_bsp/microblaze_0/include -mlittle-endian -mcpu=v10.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c: In function 'main':
+../src/main.c:47:2: error: expected identifier or '(' before 'while'
+  while
+  ^~~~~
+make: *** [src/main.o] Error 1
+11:48:31 **** Auto Build of configuration Debug for project lab3 ****
+make all 
+'Building file: ../src/main.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -I../../lab3_bsp/microblaze_0/include -mlittle-endian -mcpu=v10.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c: In function 'main':
+../src/main.c:47:7: warning: unused variable 'c' [-Wunused-variable]
+  char c;
+       ^
+../src/main.c:46:9: warning: unused variable 'b' [-Wunused-variable]
+  int a, b;
+         ^
+../src/main.c:46:6: warning: unused variable 'a' [-Wunused-variable]
+  int a, b;
+      ^
+'Finished building: ../src/main.c'
+' '
+'Building target: lab3.elf'
+'Invoking: MicroBlaze gcc linker'
+mb-gcc -Wl,-T -Wl,../src/lscript.ld -L../../lab3_bsp/microblaze_0/lib -mlittle-endian -mcpu=v10.0 -mxl-soft-mul -Wl,--no-relax -Wl,--gc-sections -o "lab3.elf"  ./src/main.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: lab3.elf'
+' '
+'Invoking: MicroBlaze Print Size'
+mb-size lab3.elf  |tee "lab3.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+   5416	    272	   3104	   8792	   2258	lab3.elf
+'Finished building: lab3.elf.size'
+' '

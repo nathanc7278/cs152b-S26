@@ -1,0 +1,9 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Nathan Chen/Downloads/UART.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module UART
+INFO: [VRFC 10-311] analyzing module clk_divider
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Nathan Chen/Downloads/rx.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module rx
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Nathan Chen/Downloads/tx.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tx
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Nathan Chen/Downloads/tb_uart.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_uart

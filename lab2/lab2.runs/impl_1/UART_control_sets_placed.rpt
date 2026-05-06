@@ -1,0 +1,77 @@
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2018.2.2 (win64) Build 2348494 Mon Oct  1 18:25:44 MDT 2018
+| Date         : Mon Apr 27 20:01:45 2026
+| Host         : LAPTOP-F29JKP8H running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file UART_control_sets_placed.rpt
+| Design       : UART
+| Device       : xc7a35t
+--------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Number of unique control sets                            |    11 |
+| Unused register locations in slices containing registers |    52 |
++----------------------------------------------------------+-------+
+
+
+2. Histogram
+------------
+
++--------+--------------+
+| Fanout | Control Sets |
++--------+--------------+
+|      2 |            8 |
+|      8 |            1 |
+|    16+ |            2 |
++--------+--------------+
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |               0 |            0 |
+| No           | No                    | Yes                    |              30 |            5 |
+| No           | Yes                   | No                     |               0 |            0 |
+| Yes          | No                    | No                     |               0 |            0 |
+| Yes          | No                    | Yes                    |              46 |           12 |
+| Yes          | Yes                   | No                     |               0 |            0 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++----------------+--------------------+------------------+------------------+----------------+
+|  Clock Signal  |    Enable Signal   | Set/Reset Signal | Slice Load Count | Bel Load Count |
++----------------+--------------------+------------------+------------------+----------------+
+|  divider/CLK   | rx/data[0]_i_1_n_0 | btnR_IBUF        |                1 |              2 |
+|  divider/CLK   | rx/data[3]_i_1_n_0 | btnR_IBUF        |                1 |              2 |
+|  divider/CLK   | rx/data[5]_i_1_n_0 | btnR_IBUF        |                1 |              2 |
+|  divider/CLK   | rx/data[7]_i_1_n_0 | btnR_IBUF        |                1 |              2 |
+|  divider/CLK   | rx/data[4]_i_1_n_0 | btnR_IBUF        |                1 |              2 |
+|  divider/CLK   | rx/data[2]_i_1_n_0 | btnR_IBUF        |                1 |              2 |
+|  divider/CLK   | rx/data[1]_i_1_n_0 | btnR_IBUF        |                1 |              2 |
+|  divider/CLK   | rx/data[6]_i_1_n_0 | btnR_IBUF        |                1 |              2 |
+|  divider/CLK   | rx/__0/i__n_0      | btnR_IBUF        |                1 |              8 |
+|  divider/CLK   | tx/tx_line_val     | btnR_IBUF        |                3 |             22 |
+|  clk_IBUF_BUFG |                    | btnR_IBUF        |                5 |             30 |
++----------------+--------------------+------------------+------------------+----------------+
+
+

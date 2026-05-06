@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Webtalk v2018.2.2 (64-bit)
+# SW Build 2348494 on Mon Oct  1 18:25:44 MDT 2018
+# IP Build 2318053 on Mon Oct  1 21:44:26 MDT 2018
+# Start of session at: Wed Apr 29 11:28:00 2026
+# Process ID: 22560
+# Current directory: C:/Users/Nathan Chen/Desktop/cs152b/cs152b/lab2/lab2.sim/sim_1/behav/xsim
+# Command line: wbtcv.exe -mode batch -source C:/Users/Nathan Chen/Desktop/cs152b/cs152b/lab2/lab2.sim/sim_1/behav/xsim/xsim.dir/tb_tx_behav/webtalk/xsim_webtalk.tcl -notrace
+# Log file: C:/Users/Nathan Chen/Desktop/cs152b/cs152b/lab2/lab2.sim/sim_1/behav/xsim/webtalk.log
+# Journal file: C:/Users/Nathan Chen/Desktop/cs152b/cs152b/lab2/lab2.sim/sim_1/behav/xsim\webtalk.jou
+#-----------------------------------------------------------
+source C:/Users/Nathan -notrace
+couldn't read file "C:/Users/Nathan": no such file or directory
+INFO: [Common 17-206] Exiting Webtalk at Wed Apr 29 11:28:00 2026...
