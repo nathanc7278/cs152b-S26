@@ -101,7 +101,7 @@ class App:
         flat = arr.flatten()
         
         ser.reset_input_buffer()
-        ser.write(b'\xFF\xFF\xFF\xFF')
+        ser.write(b'\xFF')
         ser.write(bytes(flat))
         ser.flush()
         
