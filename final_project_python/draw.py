@@ -5,10 +5,6 @@ import tkinter as tk
 from tkinter import Canvas
 import time
 
-CANVAS_SIZE = 280
-MNIST_SIZE = 28
-MNIST_DIGIT_BOX = 20
-
 ser = serial.Serial('COM9', 115200, timeout=2)
 time.sleep(0.5)
 ser.reset_input_buffer()
@@ -118,8 +114,5 @@ class App:
             print('Timeout')
             self.label.config(text='Timeout, try again')
 
-        arr = np.array(small, dtype=np.uint8)
-        print(f"max={arr.max()}, mean={arr[arr>0].mean():.1f}, nonzero={np.count_nonzero(arr)}")
-        arr = np.clip(arr, 0, 254).astype(np.uint8)
 
 App()
