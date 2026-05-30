@@ -1,0 +1,74 @@
+#include "xil_printf.h"
+#include "xparameters.h"
+#include "xgpio.h"
+#include "cnn.h"
+#include "weights.h"
+
+#define BRAM_BASE  XPAR_AXI_BRAM_CTRL_0_S_AXI_BASEADDR
+#define IMG_PIXELS 784   // 28x28
+
+XGpio frame_gpio;
+signed char input_buf[IMG_PIXELS];
+
+
+#define THRESHOLD_ADJUSTMENT 60 // Fine-tune this: higher = more "ink"
+
+void preprocess_image(signed char *raw_data, signed char *output) {
+    long sum = 0;
+
+    for(int i = 0; i < 784; i++) {
+        sum += raw_data[i];
+    }
+    int average_brightness = sum / 784;
+
+    for(int i = 0; i < 784; i++) {
+        if (raw_data[i] < (average_brightness - THRESHOLD_ADJUSTMENT)) {
+            output[i] = 127;
+        } else {
+            output[i] = -128;
+        }
+    }
+}
+
+
+int main() {
+    xil_printf("CNN ready\r\n");
+
+    XGpio_Initialize(&frame_gpio, XPAR_AXI_GPIO_1_DEVICE_ID);
+    XGpio_SetDataDirection(&frame_gpio, 1, 0xFFFFFFFF);  // all inputs
+
+    int frame_count = 0;
+    static signed char processed_buf[IMG_PIXELS];
+
+    while (1) {
+    	// frame_ready_i is connected to gpio 1
+        while ((XGpio_DiscreteRead(&frame_gpio, 1) & 0x1) == 0);
+        frame_count++;
+//        xil_printf("Frame #%d received\r\n", frame_count);
+
+        // Read 784 pixels from BRAM.
+        // downsample writes luma8 (0-255) into byte 0 of each 32-bit word,
+        // then each pixel is addressed at byte offset i*4.
+        // subtract by 128 to get -128 to 127 range for inference
+        for (int i = 0; i < IMG_PIXELS; i++) {
+            uint8_t px = *(volatile uint8_t*)(BRAM_BASE + i * 4);
+            input_buf[i] = (signed char)(px - 128);
+        }
+
+        preprocess_image(input_buf, processed_buf);
+//        xil_printf("--- Preprocessed BRAM (28x28) ---\r\n");
+//        for (int r = 0; r < 28; r++) {
+//            for (int c = 0; c < 28; c++) {
+//                uint8_t px = (uint8_t)(processed_buf[r * 28 + c] + 128);
+//                xil_printf("%X", px >> 4);  // back to 0..15, single hex digit
+//            }
+//            xil_printf("\r\n");
+//        }
+
+
+        int digit = infer(processed_buf);
+        xil_printf("Digit: %d\r\n", digit);
+    }
+
+    return 0;
+}

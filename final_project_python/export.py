@@ -1,6 +1,6 @@
 import torch
 import numpy as np
-from model import CNN
+from model import CNN, fpga_preprocess_tensor
 from torchvision import datasets, transforms
 import torch.nn.functional as F
 
@@ -11,7 +11,9 @@ state = model.state_dict()
 # print(state)
 
 data = datasets.MNIST('./data', train=True, download=True,
-                      transform=transforms.ToTensor())
+                      transform=transforms.Compose([
+                          transforms.ToTensor(),
+                      ]))
 loader = torch.utils.data.DataLoader(data, batch_size=64, shuffle=False)
 
 all_conv1 = []
@@ -21,7 +23,8 @@ all_fc2   = []
 
 with torch.no_grad():
     for i, (img, _) in enumerate(loader):
-        x = img                                                          # (N,1,28,28)
+        x = fpga_preprocess_tensor(img)
+
         x = F.conv2d(x, state['conv1.weight'], state['conv1.bias'], padding=1)
         all_conv1.append(x.numpy().flatten())
         x = F.relu(x)
@@ -45,13 +48,15 @@ with torch.no_grad():
 
 def to_scale(vals):
     max_val = np.percentile(np.abs(np.concatenate(vals)), 99.9)
-    return max_val / 127.0
+    return max(max_val / 127.0, 1e-12)
 
 input_scale = 1.0 / 127.0
-conv1_out_scale = to_scale(all_conv1)
+conv1_out_scale  = to_scale(all_conv1)
 conv2_out_scale = to_scale(all_conv2)
 fc1_out_scale = to_scale(all_fc1)
 fc2_out_scale = to_scale(all_fc2)
+
+
 
 layer_input_scales = {
     'conv1': input_scale,
@@ -65,6 +70,7 @@ def quantize_channel(tensor, bits=8):
     arr = tensor.numpy()
     max_vals = np.max(np.abs(arr.reshape(arr.shape[0], -1)), axis=1)
     scales = max_vals / (2**(bits-1) - 1)     # 2^7 - 1 = 127, map the largest value to the highest int8
+    scales = np.maximum(scales, 1e-12)
     q = np.zeros_like(arr, dtype=np.int8)
     for i, s in enumerate(scales):
         q[i] = np.clip(np.round(arr[i] / s), -128, 127)

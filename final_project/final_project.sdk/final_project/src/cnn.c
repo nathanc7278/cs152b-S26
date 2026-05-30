@@ -1,6 +1,5 @@
 #include "weights.h"
 #include <string.h>
-#include <math.h>
 
 #define INPUT_H 28
 #define INPUT_W 28
@@ -45,6 +44,7 @@ void conv2d(
 	signed char *output) {
 
 	for (int oc = 0; oc < out_ch; oc++) {
+		float s = input_scale * w_scales[oc] / output_scale;
 		for (int y = 0; y < H; y++) {
 			for (int x = 0; x < W; x++) {
 				int32_t acc = 0;
@@ -62,7 +62,9 @@ void conv2d(
 					}
 				}
 				acc += bias[oc];
-				output[(oc)*H*W + (y)*W + (x)] = clamp((int32_t)roundf((float)acc * input_scale * w_scales[oc] / output_scale));
+				float val = (float)acc * s;
+				int32_t rounded = (int32_t) (val + (val >= 0.0f ? 0.5f : -0.5f));
+				output[(oc)*H*W + (y)*W + (x)] = clamp(rounded);
  			}
 		}
 	}
@@ -114,18 +116,21 @@ void fc(
 	signed char *output) {
 
 	for (int o = 0 ; o < out_size; o++) {
+		float s = input_scale * w_scales[o] / output_scale;
 		int32_t acc = 0;
 		for (int i = 0; i < in_size; i++) {
 			acc += (int32_t)input[i] * (int32_t)weights[o * in_size + i];
 		}
 		acc += bias[o];
-		output[o] = clamp((int32_t)roundf((float)acc * input_scale * w_scales[o] / output_scale));
+		float val = (float)acc * s;
+		int32_t rounded = (int32_t) (val + (val >= 0.0f ? 0.5f : -0.5f));
+		output[o] = clamp(rounded);
 	}
 }
 
 int infer(signed char flattened_input[784]) {
-	static signed char buf_a[CONV1_OUT*28*28];
-	static signed char buf_b[CONV2_OUT*14*14];
+	static signed char buf_a[CONV1_OUT*14*14];
+	static signed char buf_b[CONV1_OUT*28*28];
 	static signed char fc1_out[FC1_OUT];
 	static signed char fc2_out[FC2_OUT];
 
@@ -151,15 +156,3 @@ int infer(signed char flattened_input[784]) {
 	}
 	return best;
 }
-
-
-
-
-
-
-
-
-
-
-
-

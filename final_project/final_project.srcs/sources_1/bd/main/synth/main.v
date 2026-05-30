@@ -1,7 +1,7 @@
 //Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2018.2.2 (win64) Build 2348494 Mon Oct  1 18:25:44 MDT 2018
-//Date        : Sat May 16 19:39:35 2026
+//Date        : Fri May 29 16:26:57 2026
 //Host        : LAPTOP-F29JKP8H running 64-bit major release  (build 9200)
 //Command     : generate_target main.bd
 //Design      : main
@@ -9,56 +9,56 @@
 //--------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* CORE_GENERATION_INFO = "main,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=main,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=13,numReposBlks=10,numNonXlnxBlks=0,numHierBlks=3,maxHierDepth=1,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=1,da_board_cnt=1,da_mb_cnt=1,synth_mode=OOC_per_IP}" *) (* HW_HANDOFF = "main.hwdef" *) 
+(* CORE_GENERATION_INFO = "main,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=main,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=13,numReposBlks=10,numNonXlnxBlks=0,numHierBlks=3,maxHierDepth=1,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=6,da_board_cnt=6,da_bram_cntlr_cnt=2,da_clkrst_cnt=11,da_mb_cnt=1,synth_mode=OOC_per_IP}" *) (* HW_HANDOFF = "main.hwdef" *) 
 module main
-   (reset,
-    sys_clock,
+   (clk,
+    reset,
     usb_uart_rxd,
     usb_uart_txd);
+  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 CLK.CLK CLK" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME CLK.CLK, CLK_DOMAIN main_sys_clock, FREQ_HZ 100000000, PHASE 0.000" *) input clk;
   (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 RST.RESET RST" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME RST.RESET, POLARITY ACTIVE_HIGH" *) input reset;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 CLK.SYS_CLOCK CLK" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME CLK.SYS_CLOCK, CLK_DOMAIN main_sys_clock, FREQ_HZ 100000000, PHASE 0.000" *) input sys_clock;
   (* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 usb_uart RxD" *) input usb_uart_rxd;
   (* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 usb_uart TxD" *) output usb_uart_txd;
 
   wire axi_uartlite_0_UART_RxD;
   wire axi_uartlite_0_UART_TxD;
+  wire clk_wiz_0_clk_out1;
   wire clk_wiz_0_locked;
   wire mdm_1_debug_sys_rst;
-  wire microblaze_0_Clk;
   wire [31:0]microblaze_0_M_AXI_DP_ARADDR;
-  wire microblaze_0_M_AXI_DP_ARREADY;
+  wire [0:0]microblaze_0_M_AXI_DP_ARREADY;
   wire microblaze_0_M_AXI_DP_ARVALID;
   wire [31:0]microblaze_0_M_AXI_DP_AWADDR;
-  wire microblaze_0_M_AXI_DP_AWREADY;
+  wire [0:0]microblaze_0_M_AXI_DP_AWREADY;
   wire microblaze_0_M_AXI_DP_AWVALID;
   wire microblaze_0_M_AXI_DP_BREADY;
   wire [1:0]microblaze_0_M_AXI_DP_BRESP;
-  wire microblaze_0_M_AXI_DP_BVALID;
+  wire [0:0]microblaze_0_M_AXI_DP_BVALID;
   wire [31:0]microblaze_0_M_AXI_DP_RDATA;
   wire microblaze_0_M_AXI_DP_RREADY;
   wire [1:0]microblaze_0_M_AXI_DP_RRESP;
-  wire microblaze_0_M_AXI_DP_RVALID;
+  wire [0:0]microblaze_0_M_AXI_DP_RVALID;
   wire [31:0]microblaze_0_M_AXI_DP_WDATA;
-  wire microblaze_0_M_AXI_DP_WREADY;
+  wire [0:0]microblaze_0_M_AXI_DP_WREADY;
   wire [3:0]microblaze_0_M_AXI_DP_WSTRB;
   wire microblaze_0_M_AXI_DP_WVALID;
   wire [31:0]microblaze_0_axi_periph_M00_AXI_ARADDR;
   wire microblaze_0_axi_periph_M00_AXI_ARREADY;
-  wire microblaze_0_axi_periph_M00_AXI_ARVALID;
+  wire [0:0]microblaze_0_axi_periph_M00_AXI_ARVALID;
   wire [31:0]microblaze_0_axi_periph_M00_AXI_AWADDR;
   wire microblaze_0_axi_periph_M00_AXI_AWREADY;
-  wire microblaze_0_axi_periph_M00_AXI_AWVALID;
-  wire microblaze_0_axi_periph_M00_AXI_BREADY;
+  wire [0:0]microblaze_0_axi_periph_M00_AXI_AWVALID;
+  wire [0:0]microblaze_0_axi_periph_M00_AXI_BREADY;
   wire [1:0]microblaze_0_axi_periph_M00_AXI_BRESP;
   wire microblaze_0_axi_periph_M00_AXI_BVALID;
   wire [31:0]microblaze_0_axi_periph_M00_AXI_RDATA;
-  wire microblaze_0_axi_periph_M00_AXI_RREADY;
+  wire [0:0]microblaze_0_axi_periph_M00_AXI_RREADY;
   wire [1:0]microblaze_0_axi_periph_M00_AXI_RRESP;
   wire microblaze_0_axi_periph_M00_AXI_RVALID;
   wire [31:0]microblaze_0_axi_periph_M00_AXI_WDATA;
   wire microblaze_0_axi_periph_M00_AXI_WREADY;
   wire [3:0]microblaze_0_axi_periph_M00_AXI_WSTRB;
-  wire microblaze_0_axi_periph_M00_AXI_WVALID;
+  wire [0:0]microblaze_0_axi_periph_M00_AXI_WVALID;
   wire microblaze_0_debug_CAPTURE;
   wire microblaze_0_debug_CLK;
   wire microblaze_0_debug_DISABLE;
@@ -96,11 +96,11 @@ module main
 
   assign axi_uartlite_0_UART_RxD = usb_uart_rxd;
   assign reset_1 = reset;
-  assign sys_clock_1 = sys_clock;
+  assign sys_clock_1 = clk;
   assign usb_uart_txd = axi_uartlite_0_UART_TxD;
   main_axi_uartlite_0_0 axi_uartlite_0
        (.rx(axi_uartlite_0_UART_RxD),
-        .s_axi_aclk(microblaze_0_Clk),
+        .s_axi_aclk(clk_wiz_0_clk_out1),
         .s_axi_araddr(microblaze_0_axi_periph_M00_AXI_ARADDR[3:0]),
         .s_axi_aresetn(rst_clk_wiz_0_100M_peripheral_aresetn),
         .s_axi_arready(microblaze_0_axi_periph_M00_AXI_ARREADY),
@@ -122,7 +122,7 @@ module main
         .tx(axi_uartlite_0_UART_TxD));
   main_clk_wiz_0_0 clk_wiz_0
        (.clk_in1(sys_clock_1),
-        .clk_out1(microblaze_0_Clk),
+        .clk_out1(clk_wiz_0_clk_out1),
         .locked(clk_wiz_0_locked),
         .reset(reset_1));
   main_mdm_1_0 mdm_1
@@ -140,7 +140,7 @@ module main
   (* KEEP_HIERARCHY = "yes" *) 
   main_microblaze_0_0 microblaze_0
        (.Byte_Enable(microblaze_0_dlmb_1_BE),
-        .Clk(microblaze_0_Clk),
+        .Clk(clk_wiz_0_clk_out1),
         .DCE(microblaze_0_dlmb_1_CE),
         .DReady(microblaze_0_dlmb_1_READY),
         .DUE(microblaze_0_dlmb_1_UE),
@@ -189,9 +189,9 @@ module main
         .Reset(rst_clk_wiz_0_100M_mb_reset),
         .Write_Strobe(microblaze_0_dlmb_1_WRITESTROBE));
   main_microblaze_0_axi_periph_0 microblaze_0_axi_periph
-       (.ACLK(microblaze_0_Clk),
+       (.ACLK(clk_wiz_0_clk_out1),
         .ARESETN(rst_clk_wiz_0_100M_interconnect_aresetn),
-        .M00_ACLK(microblaze_0_Clk),
+        .M00_ACLK(clk_wiz_0_clk_out1),
         .M00_ARESETN(rst_clk_wiz_0_100M_peripheral_aresetn),
         .M00_AXI_araddr(microblaze_0_axi_periph_M00_AXI_ARADDR),
         .M00_AXI_arready(microblaze_0_axi_periph_M00_AXI_ARREADY),
@@ -210,7 +210,7 @@ module main
         .M00_AXI_wready(microblaze_0_axi_periph_M00_AXI_WREADY),
         .M00_AXI_wstrb(microblaze_0_axi_periph_M00_AXI_WSTRB),
         .M00_AXI_wvalid(microblaze_0_axi_periph_M00_AXI_WVALID),
-        .S00_ACLK(microblaze_0_Clk),
+        .S00_ACLK(clk_wiz_0_clk_out1),
         .S00_ARESETN(rst_clk_wiz_0_100M_peripheral_aresetn),
         .S00_AXI_araddr(microblaze_0_M_AXI_DP_ARADDR),
         .S00_AXI_arready(microblaze_0_M_AXI_DP_ARREADY),
@@ -249,7 +249,7 @@ module main
         .ILMB_ready(microblaze_0_ilmb_1_READY),
         .ILMB_ue(microblaze_0_ilmb_1_UE),
         .ILMB_wait(microblaze_0_ilmb_1_WAIT),
-        .LMB_Clk(microblaze_0_Clk),
+        .LMB_Clk(clk_wiz_0_clk_out1),
         .SYS_Rst(rst_clk_wiz_0_100M_bus_struct_reset));
   main_rst_clk_wiz_0_100M_0 rst_clk_wiz_0_100M
        (.aux_reset_in(1'b1),
@@ -260,7 +260,7 @@ module main
         .mb_debug_sys_rst(mdm_1_debug_sys_rst),
         .mb_reset(rst_clk_wiz_0_100M_mb_reset),
         .peripheral_aresetn(rst_clk_wiz_0_100M_peripheral_aresetn),
-        .slowest_sync_clk(microblaze_0_Clk));
+        .slowest_sync_clk(clk_wiz_0_clk_out1));
 endmodule
 
 module main_microblaze_0_axi_periph_0
@@ -309,41 +309,41 @@ module main_microblaze_0_axi_periph_0
   input M00_ACLK;
   input M00_ARESETN;
   output [31:0]M00_AXI_araddr;
-  input M00_AXI_arready;
-  output M00_AXI_arvalid;
+  input [0:0]M00_AXI_arready;
+  output [0:0]M00_AXI_arvalid;
   output [31:0]M00_AXI_awaddr;
-  input M00_AXI_awready;
-  output M00_AXI_awvalid;
-  output M00_AXI_bready;
+  input [0:0]M00_AXI_awready;
+  output [0:0]M00_AXI_awvalid;
+  output [0:0]M00_AXI_bready;
   input [1:0]M00_AXI_bresp;
-  input M00_AXI_bvalid;
+  input [0:0]M00_AXI_bvalid;
   input [31:0]M00_AXI_rdata;
-  output M00_AXI_rready;
+  output [0:0]M00_AXI_rready;
   input [1:0]M00_AXI_rresp;
-  input M00_AXI_rvalid;
+  input [0:0]M00_AXI_rvalid;
   output [31:0]M00_AXI_wdata;
-  input M00_AXI_wready;
+  input [0:0]M00_AXI_wready;
   output [3:0]M00_AXI_wstrb;
-  output M00_AXI_wvalid;
+  output [0:0]M00_AXI_wvalid;
   input S00_ACLK;
   input S00_ARESETN;
   input [31:0]S00_AXI_araddr;
-  output S00_AXI_arready;
-  input S00_AXI_arvalid;
+  output [0:0]S00_AXI_arready;
+  input [0:0]S00_AXI_arvalid;
   input [31:0]S00_AXI_awaddr;
-  output S00_AXI_awready;
-  input S00_AXI_awvalid;
-  input S00_AXI_bready;
+  output [0:0]S00_AXI_awready;
+  input [0:0]S00_AXI_awvalid;
+  input [0:0]S00_AXI_bready;
   output [1:0]S00_AXI_bresp;
-  output S00_AXI_bvalid;
+  output [0:0]S00_AXI_bvalid;
   output [31:0]S00_AXI_rdata;
-  input S00_AXI_rready;
+  input [0:0]S00_AXI_rready;
   output [1:0]S00_AXI_rresp;
-  output S00_AXI_rvalid;
+  output [0:0]S00_AXI_rvalid;
   input [31:0]S00_AXI_wdata;
-  output S00_AXI_wready;
+  output [0:0]S00_AXI_wready;
   input [3:0]S00_AXI_wstrb;
-  input S00_AXI_wvalid;
+  input [0:0]S00_AXI_wvalid;
 
   wire S00_ACLK_1;
   wire S00_ARESETN_1;
@@ -351,77 +351,77 @@ module main_microblaze_0_axi_periph_0
   wire microblaze_0_axi_periph_ARESETN_net;
   wire [31:0]microblaze_0_axi_periph_to_s00_couplers_ARADDR;
   wire microblaze_0_axi_periph_to_s00_couplers_ARREADY;
-  wire microblaze_0_axi_periph_to_s00_couplers_ARVALID;
+  wire [0:0]microblaze_0_axi_periph_to_s00_couplers_ARVALID;
   wire [31:0]microblaze_0_axi_periph_to_s00_couplers_AWADDR;
   wire microblaze_0_axi_periph_to_s00_couplers_AWREADY;
-  wire microblaze_0_axi_periph_to_s00_couplers_AWVALID;
-  wire microblaze_0_axi_periph_to_s00_couplers_BREADY;
+  wire [0:0]microblaze_0_axi_periph_to_s00_couplers_AWVALID;
+  wire [0:0]microblaze_0_axi_periph_to_s00_couplers_BREADY;
   wire [1:0]microblaze_0_axi_periph_to_s00_couplers_BRESP;
   wire microblaze_0_axi_periph_to_s00_couplers_BVALID;
   wire [31:0]microblaze_0_axi_periph_to_s00_couplers_RDATA;
-  wire microblaze_0_axi_periph_to_s00_couplers_RREADY;
+  wire [0:0]microblaze_0_axi_periph_to_s00_couplers_RREADY;
   wire [1:0]microblaze_0_axi_periph_to_s00_couplers_RRESP;
   wire microblaze_0_axi_periph_to_s00_couplers_RVALID;
   wire [31:0]microblaze_0_axi_periph_to_s00_couplers_WDATA;
   wire microblaze_0_axi_periph_to_s00_couplers_WREADY;
   wire [3:0]microblaze_0_axi_periph_to_s00_couplers_WSTRB;
-  wire microblaze_0_axi_periph_to_s00_couplers_WVALID;
+  wire [0:0]microblaze_0_axi_periph_to_s00_couplers_WVALID;
   wire [31:0]s00_couplers_to_microblaze_0_axi_periph_ARADDR;
-  wire s00_couplers_to_microblaze_0_axi_periph_ARREADY;
+  wire [0:0]s00_couplers_to_microblaze_0_axi_periph_ARREADY;
   wire s00_couplers_to_microblaze_0_axi_periph_ARVALID;
   wire [31:0]s00_couplers_to_microblaze_0_axi_periph_AWADDR;
-  wire s00_couplers_to_microblaze_0_axi_periph_AWREADY;
+  wire [0:0]s00_couplers_to_microblaze_0_axi_periph_AWREADY;
   wire s00_couplers_to_microblaze_0_axi_periph_AWVALID;
   wire s00_couplers_to_microblaze_0_axi_periph_BREADY;
   wire [1:0]s00_couplers_to_microblaze_0_axi_periph_BRESP;
-  wire s00_couplers_to_microblaze_0_axi_periph_BVALID;
+  wire [0:0]s00_couplers_to_microblaze_0_axi_periph_BVALID;
   wire [31:0]s00_couplers_to_microblaze_0_axi_periph_RDATA;
   wire s00_couplers_to_microblaze_0_axi_periph_RREADY;
   wire [1:0]s00_couplers_to_microblaze_0_axi_periph_RRESP;
-  wire s00_couplers_to_microblaze_0_axi_periph_RVALID;
+  wire [0:0]s00_couplers_to_microblaze_0_axi_periph_RVALID;
   wire [31:0]s00_couplers_to_microblaze_0_axi_periph_WDATA;
-  wire s00_couplers_to_microblaze_0_axi_periph_WREADY;
+  wire [0:0]s00_couplers_to_microblaze_0_axi_periph_WREADY;
   wire [3:0]s00_couplers_to_microblaze_0_axi_periph_WSTRB;
   wire s00_couplers_to_microblaze_0_axi_periph_WVALID;
 
   assign M00_AXI_araddr[31:0] = s00_couplers_to_microblaze_0_axi_periph_ARADDR;
-  assign M00_AXI_arvalid = s00_couplers_to_microblaze_0_axi_periph_ARVALID;
+  assign M00_AXI_arvalid[0] = s00_couplers_to_microblaze_0_axi_periph_ARVALID;
   assign M00_AXI_awaddr[31:0] = s00_couplers_to_microblaze_0_axi_periph_AWADDR;
-  assign M00_AXI_awvalid = s00_couplers_to_microblaze_0_axi_periph_AWVALID;
-  assign M00_AXI_bready = s00_couplers_to_microblaze_0_axi_periph_BREADY;
-  assign M00_AXI_rready = s00_couplers_to_microblaze_0_axi_periph_RREADY;
+  assign M00_AXI_awvalid[0] = s00_couplers_to_microblaze_0_axi_periph_AWVALID;
+  assign M00_AXI_bready[0] = s00_couplers_to_microblaze_0_axi_periph_BREADY;
+  assign M00_AXI_rready[0] = s00_couplers_to_microblaze_0_axi_periph_RREADY;
   assign M00_AXI_wdata[31:0] = s00_couplers_to_microblaze_0_axi_periph_WDATA;
   assign M00_AXI_wstrb[3:0] = s00_couplers_to_microblaze_0_axi_periph_WSTRB;
-  assign M00_AXI_wvalid = s00_couplers_to_microblaze_0_axi_periph_WVALID;
+  assign M00_AXI_wvalid[0] = s00_couplers_to_microblaze_0_axi_periph_WVALID;
   assign S00_ACLK_1 = S00_ACLK;
   assign S00_ARESETN_1 = S00_ARESETN;
-  assign S00_AXI_arready = microblaze_0_axi_periph_to_s00_couplers_ARREADY;
-  assign S00_AXI_awready = microblaze_0_axi_periph_to_s00_couplers_AWREADY;
+  assign S00_AXI_arready[0] = microblaze_0_axi_periph_to_s00_couplers_ARREADY;
+  assign S00_AXI_awready[0] = microblaze_0_axi_periph_to_s00_couplers_AWREADY;
   assign S00_AXI_bresp[1:0] = microblaze_0_axi_periph_to_s00_couplers_BRESP;
-  assign S00_AXI_bvalid = microblaze_0_axi_periph_to_s00_couplers_BVALID;
+  assign S00_AXI_bvalid[0] = microblaze_0_axi_periph_to_s00_couplers_BVALID;
   assign S00_AXI_rdata[31:0] = microblaze_0_axi_periph_to_s00_couplers_RDATA;
   assign S00_AXI_rresp[1:0] = microblaze_0_axi_periph_to_s00_couplers_RRESP;
-  assign S00_AXI_rvalid = microblaze_0_axi_periph_to_s00_couplers_RVALID;
-  assign S00_AXI_wready = microblaze_0_axi_periph_to_s00_couplers_WREADY;
+  assign S00_AXI_rvalid[0] = microblaze_0_axi_periph_to_s00_couplers_RVALID;
+  assign S00_AXI_wready[0] = microblaze_0_axi_periph_to_s00_couplers_WREADY;
   assign microblaze_0_axi_periph_ACLK_net = M00_ACLK;
   assign microblaze_0_axi_periph_ARESETN_net = M00_ARESETN;
   assign microblaze_0_axi_periph_to_s00_couplers_ARADDR = S00_AXI_araddr[31:0];
-  assign microblaze_0_axi_periph_to_s00_couplers_ARVALID = S00_AXI_arvalid;
+  assign microblaze_0_axi_periph_to_s00_couplers_ARVALID = S00_AXI_arvalid[0];
   assign microblaze_0_axi_periph_to_s00_couplers_AWADDR = S00_AXI_awaddr[31:0];
-  assign microblaze_0_axi_periph_to_s00_couplers_AWVALID = S00_AXI_awvalid;
-  assign microblaze_0_axi_periph_to_s00_couplers_BREADY = S00_AXI_bready;
-  assign microblaze_0_axi_periph_to_s00_couplers_RREADY = S00_AXI_rready;
+  assign microblaze_0_axi_periph_to_s00_couplers_AWVALID = S00_AXI_awvalid[0];
+  assign microblaze_0_axi_periph_to_s00_couplers_BREADY = S00_AXI_bready[0];
+  assign microblaze_0_axi_periph_to_s00_couplers_RREADY = S00_AXI_rready[0];
   assign microblaze_0_axi_periph_to_s00_couplers_WDATA = S00_AXI_wdata[31:0];
   assign microblaze_0_axi_periph_to_s00_couplers_WSTRB = S00_AXI_wstrb[3:0];
-  assign microblaze_0_axi_periph_to_s00_couplers_WVALID = S00_AXI_wvalid;
-  assign s00_couplers_to_microblaze_0_axi_periph_ARREADY = M00_AXI_arready;
-  assign s00_couplers_to_microblaze_0_axi_periph_AWREADY = M00_AXI_awready;
+  assign microblaze_0_axi_periph_to_s00_couplers_WVALID = S00_AXI_wvalid[0];
+  assign s00_couplers_to_microblaze_0_axi_periph_ARREADY = M00_AXI_arready[0];
+  assign s00_couplers_to_microblaze_0_axi_periph_AWREADY = M00_AXI_awready[0];
   assign s00_couplers_to_microblaze_0_axi_periph_BRESP = M00_AXI_bresp[1:0];
-  assign s00_couplers_to_microblaze_0_axi_periph_BVALID = M00_AXI_bvalid;
+  assign s00_couplers_to_microblaze_0_axi_periph_BVALID = M00_AXI_bvalid[0];
   assign s00_couplers_to_microblaze_0_axi_periph_RDATA = M00_AXI_rdata[31:0];
   assign s00_couplers_to_microblaze_0_axi_periph_RRESP = M00_AXI_rresp[1:0];
-  assign s00_couplers_to_microblaze_0_axi_periph_RVALID = M00_AXI_rvalid;
-  assign s00_couplers_to_microblaze_0_axi_periph_WREADY = M00_AXI_wready;
+  assign s00_couplers_to_microblaze_0_axi_periph_RVALID = M00_AXI_rvalid[0];
+  assign s00_couplers_to_microblaze_0_axi_periph_WREADY = M00_AXI_wready[0];
   s00_couplers_imp_1L2J9YZ s00_couplers
        (.M_ACLK(microblaze_0_axi_periph_ACLK_net),
         .M_ARESETN(microblaze_0_axi_periph_ARESETN_net),

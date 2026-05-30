@@ -1,0 +1,98 @@
+#include "xil_printf.h"
+#include "xparameters.h"
+#include "xgpio.h"
+#include "cnn.h"
+#include "weights.h"
+
+#define BRAM_BASE  XPAR_AXI_BRAM_CTRL_0_S_AXI_BASEADDR
+#define IMG_PIXELS 784   // 28x28
+
+XGpio frame_gpio;
+static unsigned char input_buf[IMG_PIXELS];
+static signed char processed_buf[IMG_PIXELS];
+
+#define THRESHOLD_ADJUSTMENT 30  // larger gap needed given low contrast
+
+void preprocess_image(unsigned char *raw_data, signed char *output) {
+    // Step 1: find min and max to normalize contrast
+    unsigned char min_val = 255;
+    unsigned char max_val = 0;
+    for (int i = 0; i < IMG_PIXELS; i++) {
+        if (raw_data[i] < min_val) min_val = raw_data[i];
+        if (raw_data[i] > max_val) max_val = raw_data[i];
+    }
+
+    unsigned char range = max_val - min_val;
+    xil_printf("min=%d max=%d range=%d\r\n", (int)min_val, (int)max_val, (int)range);
+
+    // Step 2: if range is too small the image is blank — skip
+    if (range < 20) {
+        for (int i = 0; i < IMG_PIXELS; i++)
+            output[i] = -53;
+        return;
+    }
+
+    // Step 3: normalize to 0..255 then threshold at midpoint
+    // pixels below midpoint = ink, above = background
+    for (int i = 0; i < IMG_PIXELS; i++) {
+        // stretch contrast: (pixel - min) * 255 / range
+        unsigned char normalized = (unsigned char)(
+            ((unsigned int)(raw_data[i] - min_val) * 255) / range
+        );
+
+        // threshold at midpoint of normalized range
+        // ink is dark so normalized value will be low
+        if (normalized < 128)
+            output[i] = 127;   // ink → MNIST white digit
+        else
+            output[i] = -53;   // paper → MNIST black background
+    }
+}
+
+
+int main() {
+    xil_printf("CNN ready\r\n");
+
+    XGpio_Initialize(&frame_gpio, XPAR_AXI_GPIO_1_DEVICE_ID);
+    XGpio_SetDataDirection(&frame_gpio, 1, 0xFFFFFFFF);  // all inputs
+
+    int frame_count = 0;
+
+    while (1) {
+    	// frame_ready_i is connected to gpio 1
+        while ((XGpio_DiscreteRead(&frame_gpio, 1) & 0x1) == 0);
+        frame_count++;
+        xil_printf("Frame #%d received\r\n", frame_count);
+
+        // Read 784 pixels from BRAM.
+        // downsample writes luma8 (0-255) into byte 0 of each 32-bit word,
+        // then each pixel is addressed at byte offset i*4.
+        // subtract by 128 to get -128 to 127 range for inference
+        for (int i = 0; i < IMG_PIXELS; i++) {
+            input_buf[i] = *(volatile uint8_t*)(BRAM_BASE + i * 4);
+        }
+
+        preprocess_image(input_buf, processed_buf);
+        xil_printf("--- Preprocessed BRAM (28x28) ---\r\n");
+        for (int r = 0; r < 28; r++) {
+            for (int c = 0; c < 28; c++) {
+                uint8_t px = (uint8_t)(processed_buf[r * 28 + c] + 128);
+                xil_printf("%X", px >> 4);  // back to 0..15, single hex digit
+            }
+            xil_printf("\r\n");
+        }
+//        xil_printf("--- Raw BRAM (28x28) ---\r\n");
+//        for (int r = 0; r < 28; r++) {
+//            for (int c = 0; c < 28; c++) {
+//                xil_printf("%X", input_buf[r * 28 + c] >> 4);
+//            }
+//            xil_printf("\r\n");
+//        }
+
+
+        int digit = infer(processed_buf);
+        xil_printf("Digit: %d\r\n\r\n", digit);
+    }
+
+    return 0;
+}

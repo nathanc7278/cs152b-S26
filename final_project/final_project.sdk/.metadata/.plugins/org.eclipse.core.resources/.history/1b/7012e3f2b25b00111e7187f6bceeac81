@@ -1,0 +1,20 @@
+#include "xparameters.h"
+#include "xuartlite.h"
+
+XUartLite uart;
+
+void uart_read(u8 *buf, int n) {
+    int received = 0;
+    while (received < n)
+        received += XUartLite_Recv(&uart, buf + received, n - received);
+}
+
+int main() {
+    XUartLite_Initialize(&uart, XPAR_UARTLITE_0_DEVICE_ID);
+    while (1) {
+        u8 b;
+        uart_read(&b, 1);
+        XUartLite_Send(&uart, &b, 1);
+    }
+    return 0;
+}

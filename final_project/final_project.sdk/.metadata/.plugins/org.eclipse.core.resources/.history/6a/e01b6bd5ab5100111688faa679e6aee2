@@ -1,3 +1,0 @@
-#include "xil_printf.h"
-#include "cnn.c"
-#include <string.h>

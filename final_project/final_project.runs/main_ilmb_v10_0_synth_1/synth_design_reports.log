@@ -1,0 +1,27 @@
+
+*** Running vivado
+    with args  -m64 -nolog -nojournal -notrace -mode batch -product Vivado -source main_ilmb_v10_0_reports.tcl -tclargs synth_design
+
+
+****** Vivado v2018.2.2 (64-bit)
+  **** SW Build 2348494 on Mon Oct  1 18:25:44 MDT 2018
+  **** IP Build 2318053 on Mon Oct  1 21:44:26 MDT 2018
+    ** Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+
+source main_ilmb_v10_0_reports.tcl -notrace
+Command: open_checkpoint main_ilmb_v10_0.dcp
+
+Starting open_checkpoint Task
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.021 . Memory (MB): peak = 238.578 ; gain = 0.000
+INFO: [Project 1-479] Netlist was created with Vivado 2018.2.2
+INFO: [Device 21-403] Loading part xc7a35tcpg236-1
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+INFO: [Project 1-604] Checkpoint was created with Vivado v2018.2.2 (64-bit) build 2348494
+open_checkpoint: Time (s): cpu = 00:00:05 ; elapsed = 00:00:07 . Memory (MB): peak = 631.906 ; gain = 402.766
+INFO: [runtcl-4] Executing : report_utilization -file main_ilmb_v10_0_utilization_synth.rpt -pb main_ilmb_v10_0_utilization_synth.pb
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.011 . Memory (MB): peak = 632.656 ; gain = 0.750
+INFO: [Common 17-206] Exiting Vivado at Wed May 27 21:05:35 2026...

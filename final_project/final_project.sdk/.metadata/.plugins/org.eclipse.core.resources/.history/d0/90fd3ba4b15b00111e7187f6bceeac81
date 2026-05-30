@@ -1,0 +1,55 @@
+#include "xil_printf.h"
+#include "xparameters.h"
+#include "xuartlite.h"
+#include "cnn.h"
+#include "weights.h"
+#include <string.h>
+
+XUartLite uart;
+signed char input_buf[784];
+
+// read exactly n bytes from UART
+void uart_read(u8 *buf, int n) {
+    int received = 0;
+    while (received < n) {
+        received += XUartLite_Recv(&uart, buf + received, n - received);
+    }
+}
+
+int main() {
+    XUartLite_Initialize(&uart, XPAR_UARTLITE_0_DEVICE_ID);
+
+    xil_printf("Ready\r\n");
+
+    u8 marker[4];
+    u8 raw[784];
+
+    while (1) {
+        // wait for start marker 0xFF 0xFF 0xFF 0xFF
+        int m = 0;
+        while (m < 4) {
+            u8 b;
+            uart_read(&b, 1);
+            if (b == 0xFF) m++;
+            else m = 0;
+        }
+
+        // read 784 pixel bytes
+        uart_read(raw, 784);
+
+        // convert to signed char
+        for (int i = 0; i < 784; i++) {
+            input_buf[i] = (signed char)raw[i];
+        }
+
+        // run inference
+        int digit = infer(input_buf);
+
+        // send result back as single byte
+        u8 result = (u8)digit;
+        XUartLite_Send(&uart, &result, 1);
+
+        xil_printf("Predicted: %d\r\n", digit);
+    }
+    return 0;
+}

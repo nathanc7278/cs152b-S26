@@ -1,0 +1,74 @@
+//#include "xil_printf.h"
+//#include "xparameters.h"
+//#include "cnn.h"
+//#include <string.h>
+//#include "test_images.h"
+//
+//int main()
+//{
+//	int result = infer((signed char *)test_image);
+//	xil_printf("FPGA: %d\r\n", result);
+//	return 0;
+//}
+
+#include "xparameters.h"
+#include "xil_io.h"
+#include "xgpio.h"
+#include "sleep.h"
+
+#define GPIO_BASEADDR  XPAR_AXI_GPIO_0_BASEADDR
+#define SDA_PIN        0x1
+#define SCL_PIN        0x2
+#define OV7670_ADDR    0x21
+
+void scl_high() { Xil_Out32(GPIO_BASEADDR, Xil_In32(GPIO_BASEADDR) | SCL_PIN); usleep(5); }
+void scl_low()  { Xil_Out32(GPIO_BASEADDR, Xil_In32(GPIO_BASEADDR) & ~SCL_PIN); usleep(5); }
+void sda_high() { Xil_Out32(GPIO_BASEADDR, Xil_In32(GPIO_BASEADDR) | SDA_PIN); usleep(5); }
+void sda_low()  { Xil_Out32(GPIO_BASEADDR, Xil_In32(GPIO_BASEADDR) & ~SDA_PIN); usleep(5); }
+
+void sccb_start() { sda_high(); scl_high(); sda_low(); scl_low(); }
+void sccb_stop()  { sda_low(); scl_high(); sda_high(); }
+
+void sccb_write_byte(u8 byte) {
+    for (int i = 7; i >= 0; i--) {
+        if ((byte >> i) & 1) sda_high(); else sda_low();
+        scl_high(); scl_low();
+    }
+    // don't care bit
+    sda_high(); scl_high(); scl_low();
+}
+
+void cam_write_reg(u8 reg, u8 val) {
+    sccb_start();
+    sccb_write_byte(OV7670_ADDR << 1);
+    sccb_write_byte(reg);
+    sccb_write_byte(val);
+    sccb_stop();
+    usleep(1000);
+}
+
+void cam_init() {
+    cam_write_reg(0x12, 0x80); // reset all registers
+    usleep(200000);            // wait for reset
+    cam_write_reg(0x12, 0x00); // YUV output
+    cam_write_reg(0x11, 0x01); // clock prescaler
+    cam_write_reg(0x0C, 0x00); // no mirror/flip
+    cam_write_reg(0x3E, 0x00); // no pclk divide
+    cam_write_reg(0x70, 0x3A); // scaling
+    cam_write_reg(0x71, 0x35);
+    cam_write_reg(0x72, 0x11);
+    cam_write_reg(0x73, 0xF0);
+}
+
+int main() {
+    // Set GPIO pins as output
+    Xil_Out32(GPIO_BASEADDR + 0x4, 0x0);
+
+    cam_init();
+
+    while(1) {
+        // fabric handles camera -> framebuffer -> VGA
+    }
+    return 0;
+}
+

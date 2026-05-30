@@ -4,14 +4,14 @@ import torch.optim as optim
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 import numpy as np
-from model import CNN
+from model import CNN, FPGAInputTransform
 
 train_batch_size = 64
 test_batch_size = 1000
 
 transform = transforms.Compose([
     transforms.ToTensor(),
-    transforms.Normalize((0.1307,), (0.3081,))
+    FPGAInputTransform(),
 ])
 
 # MNIST contains 60,000 images
@@ -53,8 +53,8 @@ for epoch in range(5):
 torch.save(model.state_dict(), 'mnist_cnn.pth')
 
 # (env) PS C:\Users\Nathan\Desktop\cs152b\cs152b\finalproject> python train.py
-# Epoch 0: accuracy = 0.9261
-# Epoch 1: accuracy = 0.9592
-# Epoch 2: accuracy = 0.9653
-# Epoch 3: accuracy = 0.9694
-# Epoch 4: accuracy = 0.9698
+# Epoch 0: accuracy = 0.9476
+# Epoch 1: accuracy = 0.9687
+# Epoch 2: accuracy = 0.9726
+# Epoch 3: accuracy = 0.9741
+# Epoch 4: accuracy = 0.9759

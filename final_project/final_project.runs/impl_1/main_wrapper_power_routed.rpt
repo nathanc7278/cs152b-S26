@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.2.2 (win64) Build 2348494 Mon Oct  1 18:25:44 MDT 2018
-| Date             : Sat May 16 19:42:26 2026
+| Date             : Fri May 29 16:28:58 2026
 | Host             : LAPTOP-F29JKP8H running 64-bit major release  (build 9200)
 | Command          : report_power -file main_wrapper_power_routed.rpt -pb main_wrapper_power_summary_routed.pb -rpx main_wrapper_power_routed.rpx
 | Design           : main_wrapper
@@ -30,11 +30,11 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.192        |
+| Total On-Chip Power (W)  | 0.195        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.123        |
-| Device Static (W)        | 0.069        |
+| Dynamic (W)              | 0.122        |
+| Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 5.0          |
 | Max Ambient (C)          | 84.0         |
 | Junction Temperature (C) | 26.0         |
@@ -52,21 +52,21 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
-| Clocks                   |     0.008 |        7 |       --- |             --- |
-| Slice Logic              |     0.002 |     3427 |       --- |             --- |
-|   LUT as Logic           |     0.002 |     1268 |     20800 |            6.10 |
+| Clocks                   |     0.007 |       10 |       --- |             --- |
+| Slice Logic              |     0.002 |     3415 |       --- |             --- |
+|   LUT as Logic           |     0.002 |     1262 |     20800 |            6.07 |
 |   LUT as Distributed RAM |    <0.001 |       64 |      9600 |            0.67 |
 |   CARRY4                 |    <0.001 |       38 |      8150 |            0.47 |
-|   Register               |    <0.001 |     1134 |     41600 |            2.73 |
+|   Register               |    <0.001 |     1130 |     41600 |            2.72 |
 |   F7/F8 Muxes            |    <0.001 |      110 |     32600 |            0.34 |
 |   LUT as Shift Register  |    <0.001 |       74 |      9600 |            0.77 |
 |   Others                 |    <0.001 |      427 |       --- |             --- |
-| Signals                  |     0.003 |     2328 |       --- |             --- |
+| Signals                  |     0.004 |     2320 |       --- |             --- |
 | Block RAM                |     0.004 |        8 |        50 |           16.00 |
 | MMCM                     |     0.106 |        1 |         5 |           20.00 |
 | I/O                      |    <0.001 |        4 |       106 |            3.77 |
-| Static Power             |     0.069 |          |           |                 |
-| Total                    |     0.192 |          |           |                 |
+| Static Power             |     0.072 |          |           |                 |
+| Total                    |     0.195 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -76,9 +76,9 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.027 |       0.018 |      0.010 |
+| Vccint    |       1.000 |     0.026 |       0.016 |      0.010 |
 | Vccaux    |       1.800 |     0.071 |       0.059 |      0.013 |
-| Vcco33    |       3.300 |     0.000 |       0.000 |      0.000 |
+| Vcco33    |       3.300 |     0.001 |       0.000 |      0.001 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |
@@ -132,11 +132,14 @@ Table of Contents
 +--------------------------------------------------------+-------------------------------------------------+-----------------+
 | Clock                                                  | Domain                                          | Constraint (ns) |
 +--------------------------------------------------------+-------------------------------------------------+-----------------+
+| clk                                                    | clk                                             |            10.0 |
 | clk_out1_main_clk_wiz_0_0                              | main_i/clk_wiz_0/inst/clk_out1_main_clk_wiz_0_0 |            10.0 |
+| clk_out1_main_clk_wiz_0_0_1                            | main_i/clk_wiz_0/inst/clk_out1_main_clk_wiz_0_0 |            10.0 |
 | clkfbout_main_clk_wiz_0_0                              | main_i/clk_wiz_0/inst/clkfbout_main_clk_wiz_0_0 |            10.0 |
+| clkfbout_main_clk_wiz_0_0_1                            | main_i/clk_wiz_0/inst/clkfbout_main_clk_wiz_0_0 |            10.0 |
 | main_i/mdm_1/U0/Use_E2.BSCAN_I/Use_E2.BSCANE2_I/DRCK   | main_i/mdm_1/U0/Use_E2.BSCAN_I/drck_i           |            33.3 |
 | main_i/mdm_1/U0/Use_E2.BSCAN_I/Use_E2.BSCANE2_I/UPDATE | main_i/mdm_1/U0/Use_E2.BSCAN_I/Ext_JTAG_UPDATE  |            33.3 |
-| sys_clock                                              | sys_clock                                       |            10.0 |
+| sys_clk_pin                                            | clk                                             |            10.0 |
 +--------------------------------------------------------+-------------------------------------------------+-----------------+
 
 
@@ -149,8 +152,8 @@ Table of Contents
 +------------------------------------------------------------------------------------+-----------+
 | Name                                                                               | Power (W) |
 +------------------------------------------------------------------------------------+-----------+
-| main_wrapper                                                                       |     0.123 |
-|   main_i                                                                           |     0.123 |
+| main_wrapper                                                                       |     0.122 |
+|   main_i                                                                           |     0.122 |
 |     axi_uartlite_0                                                                 |    <0.001 |
 |       U0                                                                           |    <0.001 |
 |         AXI_LITE_IPIF_I                                                            |    <0.001 |
@@ -188,7 +191,7 @@ Table of Contents
 |     microblaze_0                                                                   |     0.011 |
 |       U0                                                                           |     0.011 |
 |         MicroBlaze_Core_I                                                          |     0.011 |
-|           Performance.Core                                                         |     0.011 |
+|           Performance.Core                                                         |     0.010 |
 |             Data_Flow_I                                                            |     0.005 |
 |               ALU_I                                                                |    <0.001 |
 |                 Using_FPGA.ALL_Bits[0].ALU_Bit_I1                                  |    <0.001 |
@@ -354,7 +357,7 @@ Table of Contents
 |                 Gen_Bits[7].MEM_EX_Result_Inst                                     |    <0.001 |
 |                 Gen_Bits[8].MEM_EX_Result_Inst                                     |    <0.001 |
 |                 Gen_Bits[9].MEM_EX_Result_Inst                                     |    <0.001 |
-|               Operand_Select_I                                                     |     0.002 |
+|               Operand_Select_I                                                     |     0.001 |
 |                 Gen_Bit[0].MUXF7_I1                                                |    <0.001 |
 |                 Gen_Bit[10].MUXF7_I1                                               |    <0.001 |
 |                 Gen_Bit[11].MUXF7_I1                                               |    <0.001 |
@@ -566,7 +569,7 @@ Table of Contents
 |                 OF_EX_MSR_Bits[29].Using_FDR.MSR_ex_I                              |    <0.001 |
 |                 OF_EX_MSR_Bits[30].Using_FDR.MSR_ex_I                              |    <0.001 |
 |             Decode_I                                                               |     0.004 |
-|               PC_Module_I                                                          |     0.001 |
+|               PC_Module_I                                                          |    <0.001 |
 |                 Instruction_Prefetch_Mux[0].Gen_Instr_DFF                          |    <0.001 |
 |                 Instruction_Prefetch_Mux[0].PC_Mux_MUXF7                           |    <0.001 |
 |                 Instruction_Prefetch_Mux[10].Gen_Instr_DFF                         |    <0.001 |
@@ -661,7 +664,7 @@ Table of Contents
 |                 Using_FPGA.Incr_PC[7].MUXCY_XOR_I                                  |     0.000 |
 |                 Using_FPGA.Incr_PC[8].MUXCY_XOR_I                                  |    <0.001 |
 |                 Using_FPGA.Incr_PC[9].MUXCY_XOR_I                                  |     0.000 |
-|               PreFetch_Buffer_I1                                                   |     0.002 |
+|               PreFetch_Buffer_I1                                                   |     0.001 |
 |                 Gen_Mux_Select_LUT6[1].Gen_Sel_DFF                                 |    <0.001 |
 |                 Gen_Mux_Select_LUT6[1].Mux_Select_LUT6                             |    <0.001 |
 |                 Gen_Mux_Select_LUT6[2].Gen_Sel_DFF                                 |    <0.001 |

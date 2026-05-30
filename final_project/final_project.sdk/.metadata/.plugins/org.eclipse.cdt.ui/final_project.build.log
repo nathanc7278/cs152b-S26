@@ -1,6 +1,21 @@
-10:26:18 **** Incremental Build of configuration Debug for project final_project ****
+18:54:43 **** Auto Build of configuration Debug for project final_project ****
 make all 
-make: Nothing to be done for `all'.
+'Building file: ../src/main.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -I"C:\Users\Nathan\Desktop\cs152b\cs152b\final_project\final_project.sdk\final_project_bsp\microblaze_0\include" -c -fmessage-length=0 -MT"src/main.o" -I../../final_project_bsp/microblaze_0/include -mlittle-endian -mcpu=v10.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+'Finished building: ../src/main.c'
+' '
+'Building target: final_project.elf'
+'Invoking: MicroBlaze gcc linker'
+mb-gcc -Wl,-T -Wl,../src/lscript.ld -L../../final_project_bsp/microblaze_0/lib -mlittle-endian -mcpu=v10.0 -mxl-soft-mul -Wl,--no-relax -Wl,--gc-sections -o "final_project.elf"  ./src/cnn.o ./src/main.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: final_project.elf'
+' '
+'Invoking: MicroBlaze Print Size'
+mb-size final_project.elf  |tee "final_project.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  21484	    288	   8948	  30720	   7800	final_project.elf
+'Finished building: final_project.elf.size'
+' '
 
-10:26:18 Build Finished (took 166ms)
+18:54:44 Build Finished (took 790ms)
 

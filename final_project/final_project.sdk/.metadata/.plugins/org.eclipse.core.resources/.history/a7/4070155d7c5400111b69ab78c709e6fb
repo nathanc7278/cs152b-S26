@@ -1,0 +1,63 @@
+//#include "xil_printf.h"
+//#include "xparameters.h"
+//#include "cnn.h"
+//#include <string.h>
+//#include "test_images.h"
+//
+//int main()
+//{
+//	int result = infer((signed char *)test_image);
+//	xil_printf("FPGA: %d\r\n", result);
+//	return 0;
+//}
+
+#include "xparameters.h"
+#include "xil_io.h"
+#include "sleep.h"
+
+#define GPIO_BASEADDR  XPAR_AXI_UARTLITE_0_BASEADDR
+#define SDA_PIN        0x1
+#define SCL_PIN        0x2
+#define OV7670_ADDR    0x21
+
+void scl_high() { Xil_Out32(GPIO_BASEADDR, Xil_In32(GPIO_BASEADDR) | SCL_PIN); usleep(5); }
+void scl_low()  { Xil_Out32(GPIO_BASEADDR, Xil_In32(GPIO_BASEADDR) & ~SCL_PIN); usleep(5); }
+void sda_high() { Xil_Out32(GPIO_BASEADDR, Xil_In32(GPIO_BASEADDR) | SDA_PIN); usleep(5); }
+void sda_low()  { Xil_Out32(GPIO_BASEADDR, Xil_In32(GPIO_BASEADDR) & ~SDA_PIN); usleep(5); }
+
+void sccb_start() { sda_high(); scl_high(); sda_low(); scl_low(); }
+void sccb_stop()  { sda_low(); scl_high(); sda_high(); }
+
+void sccb_write_byte(u8 byte) {
+    for (int i = 7; i >= 0; i--) {
+        if ((byte >> i) & 1) sda_high(); else sda_low();
+        scl_high(); scl_low();
+    }
+    sda_high(); scl_high(); scl_low(); // don't care bit
+}
+
+void cam_write_reg(u8 reg, u8 val) {
+    sccb_start();
+    sccb_write_byte(OV7670_ADDR << 1);
+    sccb_write_byte(reg);
+    sccb_write_byte(val);
+    sccb_stop();
+    usleep(1000);
+}
+
+void cam_init() {
+    cam_write_reg(0x12, 0x80); // reset
+    usleep(200000);
+    cam_write_reg(0x12, 0x00); // YUV output
+    cam_write_reg(0x11, 0x01); // clock prescaler
+    cam_write_reg(0x0C, 0x00);
+    cam_write_reg(0x3E, 0x00);
+}
+
+int main() {
+    Xil_Out32(GPIO_BASEADDR + 0x4, 0x0); // set GPIO as output
+    cam_init();
+    while(1);
+    return 0;
+}
+
