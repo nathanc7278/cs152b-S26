@@ -1,0 +1,75 @@
+#include "xil_printf.h"
+#include <stdint.h>
+#include <time.h>
+
+#define N 1000000
+
+int main() {
+    volatile int32_t sink = 0;
+    clock_t start, end;
+
+    xil_printf("\r\n=== Multiply Benchmark (N=%d) ===\r\n\r\n", N);
+
+    // int8
+    {
+        int8_t a = 127, b = 64;
+        int8_t acc = 0;
+        start = clock();
+        for (int i = 0; i < N; i++) acc += a * b;
+        end = clock();
+        sink = acc;
+        xil_printf("int8:             %d ticks  (%d ticks/op)\r\n",
+                   (int)(end-start), (int)((end-start)/N));
+    }
+
+    // int16
+    {
+        int16_t a = 32767, b = 64;
+        int16_t acc = 0;
+        start = clock();
+        for (int i = 0; i < N; i++) acc += a * b;
+        end = clock();
+        sink = acc;
+        xil_printf("int16:            %d ticks  (%d ticks/op)\r\n",
+                   (int)(end-start), (int)((end-start)/N));
+    }
+
+    // int32
+    {
+        int32_t a = 100000, b = 64;
+        int32_t acc = 0;
+        start = clock();
+        for (int i = 0; i < N; i++) acc += a * b;
+        end = clock();
+        sink = acc;
+        xil_printf("int32:            %d ticks  (%d ticks/op)\r\n",
+                   (int)(end-start), (int)((end-start)/N));
+    }
+
+    // int8 * int8 -> int32
+    {
+        int8_t a = 127, b = 64;
+        int32_t acc = 0;
+        start = clock();
+        for (int i = 0; i < N; i++) acc += (int32_t)a * (int32_t)b;
+        end = clock();
+        sink = acc;
+        xil_printf("int8->int32 macc: %d ticks  (%d ticks/op)\r\n",
+                   (int)(end-start), (int)((end-start)/N));
+    }
+
+    // fp32
+    {
+        float a = 1.5f, b = 2.5f;
+        float acc = 0.0f;
+        start = clock();
+        for (int i = 0; i < N; i++) acc += a * b;
+        end = clock();
+        sink = (int32_t)acc;
+        xil_printf("fp32:             %d ticks  (%d ticks/op)\r\n",
+                   (int)(end-start), (int)((end-start)/N));
+    }
+
+    xil_printf("\r\n=== Done ===\r\n");
+    return 0;
+}

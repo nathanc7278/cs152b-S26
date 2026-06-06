@@ -39,4 +39,10 @@ set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==main_ilmb_bram_
 # IP: bd/main/ip/main_lmb_bram_0/main_lmb_bram_0.xci
 set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==main_lmb_bram_0 || ORIG_REF_NAME==main_lmb_bram_0} -quiet] -quiet
 
+# IP: bd/main/ip/main_axi_timer_0_0/main_axi_timer_0_0.xci
+set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==main_axi_timer_0_0 || ORIG_REF_NAME==main_axi_timer_0_0} -quiet] -quiet
+
+# IP: bd/main/ip/main_xbar_0/main_xbar_0.xci
+set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==main_xbar_0 || ORIG_REF_NAME==main_xbar_0} -quiet] -quiet
+
 # XDC: bd/main/main_ooc.xdc

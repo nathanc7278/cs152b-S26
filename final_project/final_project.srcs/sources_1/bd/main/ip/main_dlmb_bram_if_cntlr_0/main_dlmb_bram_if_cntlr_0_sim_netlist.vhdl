@@ -1,10 +1,10 @@
 -- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2018.2.2 (win64) Build 2348494 Mon Oct  1 18:25:44 MDT 2018
--- Date        : Sat May 16 19:40:27 2026
+-- Date        : Tue Jun  2 14:15:04 2026
 -- Host        : LAPTOP-F29JKP8H running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode funcsim -rename_top main_dlmb_bram_if_cntlr_0 -prefix
---               main_dlmb_bram_if_cntlr_0_ main_dlmb_bram_if_cntlr_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim
+--               C:/Users/Nathan/Desktop/cs152b/cs152b/final_project/final_project.srcs/sources_1/bd/main/ip/main_dlmb_bram_if_cntlr_0/main_dlmb_bram_if_cntlr_0_sim_netlist.vhdl
 -- Design      : main_dlmb_bram_if_cntlr_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -121,7 +121,7 @@ entity main_dlmb_bram_if_cntlr_0_lmb_bram_if_cntlr is
   attribute C_LMB_DWIDTH : integer;
   attribute C_LMB_DWIDTH of main_dlmb_bram_if_cntlr_0_lmb_bram_if_cntlr : entity is 32;
   attribute C_MASK : string;
-  attribute C_MASK of main_dlmb_bram_if_cntlr_0_lmb_bram_if_cntlr : entity is "64'b0000000000000000000000000000000000000000001000000000000000000000";
+  attribute C_MASK of main_dlmb_bram_if_cntlr_0_lmb_bram_if_cntlr : entity is "64'b0000000000000000000000000000000000000000010000000000000000000000";
   attribute C_MASK1 : string;
   attribute C_MASK1 of main_dlmb_bram_if_cntlr_0_lmb_bram_if_cntlr : entity is "64'b0000000000000000000000000000000000000000100000000000000000000000";
   attribute C_MASK2 : string;
@@ -142,6 +142,8 @@ entity main_dlmb_bram_if_cntlr_0_lmb_bram_if_cntlr is
   attribute C_UE_FAILING_REGISTERS of main_dlmb_bram_if_cntlr_0_lmb_bram_if_cntlr : entity is 0;
   attribute C_WRITE_ACCESS : integer;
   attribute C_WRITE_ACCESS of main_dlmb_bram_if_cntlr_0_lmb_bram_if_cntlr : entity is 2;
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of main_dlmb_bram_if_cntlr_0_lmb_bram_if_cntlr : entity is "lmb_bram_if_cntlr";
 end main_dlmb_bram_if_cntlr_0_lmb_bram_if_cntlr;
 
 architecture STRUCTURE of main_dlmb_bram_if_cntlr_0_lmb_bram_if_cntlr is
@@ -335,7 +337,7 @@ begin
     )
         port map (
       I0 => LMB_BE(0),
-      I1 => \^lmb_abus\(10),
+      I1 => \^lmb_abus\(9),
       I2 => LMB_WriteStrobe,
       O => BRAM_WEN_A(0)
     );
@@ -344,7 +346,7 @@ begin
       INIT => X"40"
     )
         port map (
-      I0 => \^lmb_abus\(10),
+      I0 => \^lmb_abus\(9),
       I1 => LMB_WriteStrobe,
       I2 => LMB_BE(1),
       O => BRAM_WEN_A(1)
@@ -354,7 +356,7 @@ begin
       INIT => X"40"
     )
         port map (
-      I0 => \^lmb_abus\(10),
+      I0 => \^lmb_abus\(9),
       I1 => LMB_WriteStrobe,
       I2 => LMB_BE(2),
       O => BRAM_WEN_A(2)
@@ -364,7 +366,7 @@ begin
       INIT => X"40"
     )
         port map (
-      I0 => \^lmb_abus\(10),
+      I0 => \^lmb_abus\(9),
       I1 => LMB_WriteStrobe,
       I2 => LMB_BE(3),
       O => BRAM_WEN_A(3)
@@ -378,7 +380,7 @@ GND: unisim.vcomponents.GND
       INIT => X"1"
     )
         port map (
-      I0 => \^lmb_abus\(10),
+      I0 => \^lmb_abus\(9),
       I1 => LMB_Rst,
       O => \No_ECC.Sl_Rdy_i_1_n_0\
     );
@@ -510,7 +512,7 @@ architecture STRUCTURE of main_dlmb_bram_if_cntlr_0 is
   attribute C_LMB_DWIDTH : integer;
   attribute C_LMB_DWIDTH of U0 : label is 32;
   attribute C_MASK : string;
-  attribute C_MASK of U0 : label is "64'b0000000000000000000000000000000000000000001000000000000000000000";
+  attribute C_MASK of U0 : label is "64'b0000000000000000000000000000000000000000010000000000000000000000";
   attribute C_MASK1 : string;
   attribute C_MASK1 of U0 : label is "64'b0000000000000000000000000000000000000000100000000000000000000000";
   attribute C_MASK2 : string;

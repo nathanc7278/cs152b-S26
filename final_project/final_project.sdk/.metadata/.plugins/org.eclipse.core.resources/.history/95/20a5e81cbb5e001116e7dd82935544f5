@@ -1,0 +1,66 @@
+#include "xil_printf.h"
+#include "xtime_l.h"
+#include <stdint.h>
+
+#define N 1000000
+
+int main() {
+    XTime t1, t2;
+    volatile int32_t sink = 0;
+
+    // int8
+	int8_t a = 127, b = 64;
+	int8_t acc = 0;
+	XTime_GetTime(&t1);
+	for (int i = 0; i < N; i++) acc += a * b;
+	XTime_GetTime(&t2);
+	sink = acc;
+	xil_printf("int8:  %d cycles\r\n", (int)((t2-t1)*2));
+
+    // int16
+    {
+        int16_t a = 32767, b = 64;
+        int16_t acc = 0;
+        XTime_GetTime(&t1);
+        for (int i = 0; i < N; i++) acc += a * b;
+        XTime_GetTime(&t2);
+        sink = acc;
+        xil_printf("int16: %d cycles\r\n", (int)((t2-t1)*2));
+    }
+
+    // int32
+    {
+        int32_t a = 100000, b = 64;
+        int32_t acc = 0;
+        XTime_GetTime(&t1);
+        for (int i = 0; i < N; i++) acc += a * b;
+        XTime_GetTime(&t2);
+        sink = acc;
+        xil_printf("int32: %d cycles\r\n", (int)((t2-t1)*2));
+    }
+
+    // int8 * int8 -> int32 (what your CNN does)
+    {
+        int8_t a = 127, b = 64;
+        int32_t acc = 0;
+        XTime_GetTime(&t1);
+        for (int i = 0; i < N; i++) acc += (int32_t)a * (int32_t)b;
+        XTime_GetTime(&t2);
+        sink = acc;
+        xil_printf("int8->int32 macc: %d cycles\r\n", (int)((t2-t1)*2));
+    }
+
+    // fp32
+    {
+        float a = 1.5f, b = 2.5f;
+        float acc = 0.0f;
+        XTime_GetTime(&t1);
+        for (int i = 0; i < N; i++) acc += a * b;
+        XTime_GetTime(&t2);
+        sink = (int32_t)acc;
+        xil_printf("fp32:  %d cycles\r\n", (int)((t2-t1)*2));
+    }
+
+    xil_printf("\r\n=== Done ===\r\n");
+    return 0;
+}

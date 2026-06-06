@@ -1,0 +1,109 @@
+#include "xil_printf.h"
+#include "xparameters.h"
+#include "xtmrctr.h"
+#include <stdint.h>
+
+#define N 1000000
+volatile int32_t sink = 0;
+XTmrCtr timer;
+
+int main() {
+    XTmrCtr_Initialize(&timer, XPAR_TMRCTR_0_DEVICE_ID);
+    XTmrCtr_SetOptions(&timer, 0, XTC_AUTO_RELOAD_OPTION);
+    xil_printf("\r\n=== Benchmark ===\r\n");
+
+    // int8 MAC
+    {
+        volatile int8_t a = 100;
+        volatile int8_t b = 64;
+        volatile int32_t acc = 0;
+        XTmrCtr_Reset(&timer, 0);
+        XTmrCtr_Start(&timer, 0);
+        for (int i = 0; i < N; i++) {
+            acc += (int32_t)a * (int32_t)b;
+        }
+        uint32_t elapsed = XTmrCtr_GetValue(&timer, 0);
+        XTmrCtr_Stop(&timer, 0);
+        sink = acc;
+        xil_printf("int8 MAC:      %d cycles  (%d ns)\r\n",
+                   (int)elapsed, (int)(elapsed * 10));
+    }
+
+    // int32 MAC
+    {
+        volatile int32_t a = 100;
+        volatile int32_t b = 64;
+        volatile int32_t acc = 0;
+        XTmrCtr_Reset(&timer, 0);
+        XTmrCtr_Start(&timer, 0);
+        for (int i = 0; i < N; i++) {
+            acc += a * b;
+        }
+        uint32_t elapsed = XTmrCtr_GetValue(&timer, 0);
+        XTmrCtr_Stop(&timer, 0);
+        sink = acc;
+        xil_printf("int32 MAC:     %d cycles  (%d ns)\r\n",
+                   (int)elapsed, (int)(elapsed * 10));
+    }
+
+    // float MAC
+    {
+        volatile float a = 100.0f;
+        volatile float b = 64.0f;
+        volatile float acc = 0.0f;
+        XTmrCtr_Reset(&timer, 0);
+        XTmrCtr_Start(&timer, 0);
+        for (int i = 0; i < N; i++) {
+            acc += a * b;
+        }
+        uint32_t elapsed = XTmrCtr_GetValue(&timer, 0);
+        XTmrCtr_Stop(&timer, 0);
+        sink = (int32_t)acc;
+        xil_printf("float MAC:     %d cycles  (%d ns)\r\n",
+                   (int)elapsed, (int)(elapsed * 10));
+    }
+
+    // float requantization (what your CNN does per output pixel)
+    {
+        volatile int32_t acc_int = 12345;
+        volatile float s = 0.00787f;
+        volatile int32_t result = 0;
+        XTmrCtr_Reset(&timer, 0);
+        XTmrCtr_Start(&timer, 0);
+        for (int i = 0; i < N; i++) {
+            float val = (float)acc_int * s;
+            result = (int32_t)(val + (val >= 0.0f ? 0.5f : -0.5f));
+        }
+        uint32_t elapsed = XTmrCtr_GetValue(&timer, 0);
+        XTmrCtr_Stop(&timer, 0);
+        sink = result;
+        xil_printf("float requant: %d cycles  (%d ns)\r\n",
+                   (int)elapsed, (int)(elapsed * 10));
+    }
+
+    // Full CNN inner loop simulation (ic/ky/kx loop body)
+    {
+        volatile int8_t x = 50;
+        volatile int8_t w = 30;
+        volatile int32_t acc = 0;
+        volatile float s = 0.00787f;
+        volatile int8_t out = 0;
+        XTmrCtr_Reset(&timer, 0);
+        XTmrCtr_Start(&timer, 0);
+        for (int i = 0; i < N; i++) {
+            acc += (int32_t)x * (int32_t)w;
+            float val = (float)acc * s;
+            out = (int8_t)(val + (val >= 0.0f ? 0.5f : -0.5f));
+        }
+        uint32_t elapsed = XTmrCtr_GetValue(&timer, 0);
+        XTmrCtr_Stop(&timer, 0);
+        sink = out;
+        xil_printf("CNN loop body: %d cycles  (%d ns)\r\n",
+                   (int)elapsed, (int)(elapsed * 10));
+    }
+
+    xil_printf("\r\nPer-operation (divide by %d):\r\n", N);
+    xil_printf("Assumes 100MHz clock -> 10ns per cycle\r\n");
+
+    while(1);
+}

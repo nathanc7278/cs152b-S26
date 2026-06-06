@@ -1,0 +1,67 @@
+#include "xil_printf.h"
+#include "xparameters.h"
+#include "xtmrctr.h"
+#include <stdint.h>
+
+#define N 10000000
+volatile int32_t sink = 0;
+XTmrCtr timer;
+
+int main() {
+    XTmrCtr_Initialize(&timer, XPAR_TMRCTR_0_DEVICE_ID);
+    XTmrCtr_SetOptions(&timer, 0, XTC_AUTO_RELOAD_OPTION);
+    xil_printf("\r\n=== MAC Benchmark ===\r\n");
+
+    // int8 MAC
+    {
+        volatile int8_t a = 100;
+        volatile int8_t b = 64;
+        volatile int32_t acc = 0;
+        XTmrCtr_Reset(&timer, 0);
+        XTmrCtr_Start(&timer, 0);
+        for (int i = 0; i < N; i++) {
+            acc += (int32_t)a * (int32_t)b;
+        }
+        uint32_t elapsed = XTmrCtr_GetValue(&timer, 0);
+        XTmrCtr_Stop(&timer, 0);
+        sink = acc;
+        xil_printf("int8 MAC:  %d cycles total, %d cycles/op\r\n",
+                   (int)elapsed, (int)(elapsed / N));
+    }
+
+    // int32 MAC
+    {
+        volatile int32_t a = 100;
+        volatile int32_t b = 64;
+        volatile int32_t acc = 0;
+        XTmrCtr_Reset(&timer, 0);
+        XTmrCtr_Start(&timer, 0);
+        for (int i = 0; i < N; i++) {
+            acc += a * b;
+        }
+        uint32_t elapsed = XTmrCtr_GetValue(&timer, 0);
+        XTmrCtr_Stop(&timer, 0);
+        sink = acc;
+        xil_printf("int32 MAC: %d cycles total, %d cycles/op\r\n",
+                   (int)elapsed, (int)(elapsed / N));
+    }
+
+    // float MAC
+    {
+        volatile float a = 100.0f;
+        volatile float b = 64.0f;
+        volatile float acc = 0.0f;
+        XTmrCtr_Reset(&timer, 0);
+        XTmrCtr_Start(&timer, 0);
+        for (int i = 0; i < N; i++) {
+            acc += a * b;
+        }
+        uint32_t elapsed = XTmrCtr_GetValue(&timer, 0);
+        XTmrCtr_Stop(&timer, 0);
+        sink = (int32_t)acc;
+        xil_printf("float MAC: %d cycles total, %d cycles/op\r\n",
+                   (int)elapsed, (int)(elapsed / N));
+    }
+
+    while(1);
+}

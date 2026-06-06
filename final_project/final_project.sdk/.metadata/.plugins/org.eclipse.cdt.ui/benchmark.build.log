@@ -1,0 +1,21 @@
+14:27:55 **** Auto Build of configuration Debug for project benchmark ****
+make all 
+'Building file: ../src/benchmark.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/benchmark.o" -I../../benchmark_bsp/microblaze_0/include -mlittle-endian -mcpu=v10.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/benchmark.d" -MT"src/benchmark.o" -o "src/benchmark.o" "../src/benchmark.c"
+'Finished building: ../src/benchmark.c'
+' '
+'Building target: benchmark.elf'
+'Invoking: MicroBlaze gcc linker'
+mb-gcc -Wl,-T -Wl,../src/lscript.ld -L../../benchmark_bsp/microblaze_0/lib -mlittle-endian -mcpu=v10.0 -mxl-soft-mul -Wl,--no-relax -Wl,--gc-sections -o "benchmark.elf"  ./src/benchmark.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: benchmark.elf'
+' '
+'Invoking: MicroBlaze Print Size'
+mb-size benchmark.elf  |tee "benchmark.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  13500	    292	   3168	  16960	   4240	benchmark.elf
+'Finished building: benchmark.elf.size'
+' '
+
+14:27:55 Build Finished (took 879ms)
+

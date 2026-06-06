@@ -1,0 +1,36 @@
+#include "xil_printf.h"
+#include <stdint.h>
+
+#define N 1000000
+
+volatile int32_t sink = 0;
+
+static inline uint32_t get_cycles() {
+    uint32_t cycles;
+    asm volatile ("mfs %0, rpc" : "=r"(cycles));
+    return cycles;
+}
+
+int main() {
+    uint32_t start, end;
+
+    xil_printf("\r\n=== Benchmark ===\r\n");
+
+    volatile int32_t a = 100;
+    volatile int32_t b = 64;
+    volatile int32_t acc = 0;
+
+    start = get_cycles();
+
+    for (int i = 0; i < N; i++) {
+        acc += a * b;
+    }
+
+    end = get_cycles();
+
+    sink = acc;
+
+    xil_printf("elapsed = %d\r\n", (int)(end - start));
+
+    while(1);
+}

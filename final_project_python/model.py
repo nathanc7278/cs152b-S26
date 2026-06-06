@@ -4,7 +4,7 @@ import torch.nn as nn
 # Output dimensions = (W - K + 2P) / S + 1
 
 def fpga_preprocess_tensor(x):
-    return (torch.clamp(torch.round(x * 255.0), 0.0, 254.0) - 128.0) / 127.0
+    return (torch.clamp(torch.round(x *  255.0), 0.0, 254.0) - 128.0) / 127.0
 
 
 class FPGAInputTransform:

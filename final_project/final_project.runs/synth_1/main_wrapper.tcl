@@ -55,6 +55,9 @@ set_property used_in_implementation false [get_files -all c:/Users/Nathan/Deskto
 set_property used_in_implementation false [get_files -all c:/Users/Nathan/Desktop/cs152b/cs152b/final_project/final_project.srcs/sources_1/bd/main/ip/main_dlmb_bram_if_cntlr_0/main_dlmb_bram_if_cntlr_0_ooc.xdc]
 set_property used_in_implementation false [get_files -all c:/Users/Nathan/Desktop/cs152b/cs152b/final_project/final_project.srcs/sources_1/bd/main/ip/main_ilmb_bram_if_cntlr_0/main_ilmb_bram_if_cntlr_0_ooc.xdc]
 set_property used_in_implementation false [get_files -all c:/Users/Nathan/Desktop/cs152b/cs152b/final_project/final_project.srcs/sources_1/bd/main/ip/main_lmb_bram_0/main_lmb_bram_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Nathan/Desktop/cs152b/cs152b/final_project/final_project.srcs/sources_1/bd/main/ip/main_axi_timer_0_0/main_axi_timer_0_0.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Nathan/Desktop/cs152b/cs152b/final_project/final_project.srcs/sources_1/bd/main/ip/main_axi_timer_0_0/main_axi_timer_0_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Nathan/Desktop/cs152b/cs152b/final_project/final_project.srcs/sources_1/bd/main/ip/main_xbar_0/main_xbar_0_ooc.xdc]
 set_property used_in_implementation false [get_files -all C:/Users/Nathan/Desktop/cs152b/cs152b/final_project/final_project.srcs/sources_1/bd/main/main_ooc.xdc]
 
 # Mark all dcp files as not used in implementation to prevent them from being
